@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.CarDao">
+	<resultMap id="carMap" type="com.wy.model.sys.CarEntity">
+		<id column="id" property="id" />
+		<result column="househouldId" property="househouldId" />
+		<result column="parkingLotId" property="parkingLotId" />
+		<result column="plateNum" property="plateNum" />
+		<result column="carBranch" property="carBranch" />
+		<result column="color" property="color" />
+		<result column="seats" property="seats" />
+		<result column="parkingCardNum" property="parkingCardNum" />
+		<result column="createTime" property="createTime" />
+		<result column="ext1" property="ext1" />
+		<result column="ext2" property="ext2" />
+		<result column="ext3" property="ext3" />
+		<result column="ext4" property="ext4" />
+		<result column="ext5" property="ext5" />
+		<result column="ext6" property="ext6" />
+		<result column="ext7" property="ext7" />
+		<result column="ext8" property="ext8" />
+		<result column="ext9" property="ext9" />
+	</resultMap>
+
+	<!-- 获取车辆列表 -->
+	<select id="carList" resultMap="carMap">
+	<![CDATA[select * from cars]]>
+		<where>
+			<if test="plateNum != null and plateNum != ''">
+				plateNum = #{plateNum}
+			</if>
+			<if test="househouldId != null and househouldId != ''">
+				and househouldId = #{househouldId}
+			</if>
+		</where>
+	    <![CDATA[ order by id ]]>
+		<if test="pageSize != null and start != null ">
+			limit #{start},#{pageSize}
+		</if>
+	</select>
+	<!-- 获取房屋列表的总量 -->
+	<select id="carSize" resultType="Integer">
+	    <![CDATA[select count(*) from cars]]>
+	    <where>
+			<if test="plateNum != null and plateNum != ''">
+				plateNum = #{plateNum}
+			</if>
+			<if test="househouldId != null and househouldId != ''">
+				and househouldId = #{househouldId}
+			</if>
+		</where>
+	</select>
+	<!-- 新建用户信息 -->
+	<insert id="insertCar">
+		INSERT INTO `cars` (`buildId`, `houseCode`, `houseName`, `houseLevel`, `houseArea`, `houseType`, `face`)
+		VALUES (#{carEntity.buildId}, #{carEntity.houseCode}, #{houseEntity.houseName}, #{houseEntity.houseLevel}, #{houseEntity.houseArea}, #{houseEntity.houseType}, #{houseEntity.face});
+	</insert>
+	<!-- 更新用户信息 -->
+	<update id="updateCar">
+		update cars set
+		buildId = #{carEntity.buildId},
+		houseCode = #{carEntity.houseCode},
+		houseName = #{carEntity.houseName},
+		houseLevel = #{carEntity.houseLevel},
+		houseArea = #{carEntity.houseArea},
+		houseType = #{carEntity.houseType},
+		face = #{carEntity.face}
+		<where>
+			id = #{carEntity.id}
+		</where>
+	</update>
+	<!-- 删除用户信息 -->
+	<delete id="deleteCar">
+		delete from cars
+		<where>
+			<if test="hids !=null">
+				id in
+				<foreach collection="hids" item="item" index="index"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+</mapper>

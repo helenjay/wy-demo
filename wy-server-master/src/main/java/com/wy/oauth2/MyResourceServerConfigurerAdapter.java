@@ -14,7 +14,7 @@ public class MyResourceServerConfigurerAdapter extends ResourceServerConfigurerA
 		http.
 		authorizeRequests()
 		.antMatchers("/usernamepassword/token").permitAll()
-		.antMatchers("/users/**","/menus/**","/roles/**").hasRole("ADMIN")
+		.antMatchers("/users/**","/menus/**","/roles/**","/households/**").hasRole("ADMIN")
 		.anyRequest()
 		.authenticated();
 	}

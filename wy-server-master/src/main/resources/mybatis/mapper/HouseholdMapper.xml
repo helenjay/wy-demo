@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.HouseholdDao">
+	<resultMap id="householdMap" type="com.wy.model.sys.HouseholdEntity">
+		<id column="id" property="id" />
+		<result column="houseId" property="houseId" />
+		<result column="householdName" property="householdName" />
+		<result column="sex" property="sex" />
+		<result column="birthday" property="birthday" />
+		<result column="identityType" property="identityType" />
+		<result column="company" property="company" />
+		<result column="department" property="department" />
+		<result column="cardType" property="cardType" />
+		<result column="cardNo" property="cardNo" />
+		<result column="mobile" property="mobile" />
+		<result column="createTime" property="createTime" />
+		<result column="modifyTime" property="modifyTime" />
+		<result column="authStatus" property="authStatus" />
+		<result column="idCardImage1" property="idCardImage1" />
+		<result column="idCardImage2" property="idCardImage2" />
+		<result column="currentImage" property="currentImage" />
+		<result column="address" property="address" />
+		<result column="status" property="status" />
+	</resultMap>
+
+	<!-- 获取住户列表 -->
+	<select id="householdList" resultMap="householdMap">
+	<![CDATA[select * from households]]>
+		<where>
+			<if test="householdId != null and householdId != ''">
+				id = #{householdId}
+			</if>
+			<!--<if test="householdName != null and householdName != ''">-->
+				<!--and householdName = #{householdName}-->
+			<!--</if>-->
+			<!--<if test="houseNo != null and houseNo != ''">-->
+				<!--and houseNo = #{houseNo}-->
+			<!--</if>-->
+		</where>
+	    <![CDATA[ order by id ]]>
+		<if test="pageSize != null and start != null ">
+			limit #{start},#{pageSize}
+		</if>
+	</select>
+	<!-- 获取住户列表的总量 -->
+	<select id="householdSize" resultType="Integer">
+	    <![CDATA[select count(*) from households]]>
+	    <where>
+			<if test="householdId != null and householdId != ''">
+				householdId = #{householdId}
+			</if>
+			<!--<if test="householdName != null and householdName != ''">-->
+				<!--and householdName = #{householdName}-->
+			<!--</if>-->
+			<!--<if test="houseNo != null and houseNo != ''">-->
+				<!--and houseNo = #{houseNo}-->
+			<!--</if>-->
+		</where>
+	</select>
+	<!-- 新建用户信息 -->
+	<insert id="insertHousehold">
+		INSERT INTO `households` (`houseId`, `householdName`, `sex`, `birthday`, `identityType`, `company`, `department`, `cardType`, `cardNo`, `mobile`, `createTime`, `modifyTime`, `authStatus`, `idCardImage1`, `idCardImage2`, `currentImage`, `address`, `status`, `ext1`, `ext2`, `ext3`, `ext4`, `ext5`)
+		VALUES (#{householdEntity.houseId}, #{householdEntity.householdName}, #{householdEntity.sex}, #{householdEntity.birthday}, #{householdEntity.identityType}, #{householdEntity.company}, #{householdEntity.department}, #{householdEntity.cardType}, #{householdEntity.cardNo}, #{householdEntity.mobile},
+		#{householdEntity.createTime}, #{householdEntity.modifyTime}, #{householdEntity.authStatus}, #{householdEntity.idCardImage1}, #{householdEntity.idCardImage2}, #{householdEntity.currentImage}, #{householdEntity.address}, #{householdEntity.status}, #{householdEntity.ext1}, #{householdEntity.ext2}, #{householdEntity.ext3}, #{householdEntity.ext4}, #{householdEntity.ext5});
+	</insert>
+	<!-- 更新用户信息 -->
+	<update id="updateHousehold">
+		update households set
+		houseId = #{householdEntity.houseId},
+		householdName = #{householdEntity.householdName},
+		sex = #{householdEntity.sex},
+		birthday = #{householdEntity.birthday},
+		identityType = #{householdEntity.identityType},
+		company = #{householdEntity.company},
+		department = #{householdEntity.department},
+		cardType = #{householdEntity.cardType},
+		cardNo = #{householdEntity.cardNo},
+		mobile = #{householdEntity.mobile},
+		createTime = #{householdEntity.createTime},
+		modifyTime = #{householdEntity.modifyTime},
+		authStatus = #{householdEntity.authStatus},
+		idCardImage1 = #{householdEntity.idCardImage1},
+		idCardImage2 = #{householdEntity.idCardImage2},
+		currentImage = #{householdEntity.currentImage},
+		address = #{householdEntity.address},
+		status = #{householdEntity.status}
+		<where>
+			id = #{householdEntity.id}
+		</where>
+	</update>
+	<!-- 删除用户信息 -->
+	<delete id="deleteHousehold">
+		delete from households
+		<where>
+			<if test="hids !=null">
+				id in
+				<foreach collection="hids" item="item" index="index"
+					open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</delete>
+</mapper>

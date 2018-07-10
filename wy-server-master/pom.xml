@@ -6,7 +6,8 @@
 	<groupId>com.wanghuan</groupId>
 	<artifactId>wy-spring-boot</artifactId>
 	<version>1.0.2-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!--<packaging>war</packaging>-->
+	<packaging>jar</packaging>
 
 	<name>wy-spring-boot</name>
 	<description>Demo project for Spring Boot</description>
@@ -47,7 +48,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -56,7 +60,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<!--<scope>provided</scope>-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
