@@ -132,7 +132,7 @@
                 menuSub: [],
                 /*面包屑data*/
                 breadcrumbData: []
-            }
+            };
         },
         mounted(){
             /*this.$router.push();*/
