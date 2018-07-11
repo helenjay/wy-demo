@@ -1,7 +1,6 @@
 package com.wy.service.wy;
 
-import com.wy.model.sys.HouseholdEntity;
-import com.wy.model.sys.MenuEntity;
+import com.wy.model.sys.Households;
 
 import java.util.List;
 
@@ -12,34 +11,34 @@ public interface HouseholdService {
 	 * 获取住户列表
 	 * @return
 	 */
-	List<HouseholdEntity> householdList(int pageSize, int start, String householdId);
+	List<Households> householdList(int pageSize, int start, Integer id);
 
 	/**
 	 * 获取住户列表的总量
 	 * 
 	 * @return
 	 */
-	Integer householdSize(int pageSize, int start, String householdId);
+	Integer householdSize(int pageSize, int start, Integer id);
 
 	/**
 	 * 新建住户信息
 	 * 
 	 * @param householdEntity
 	 */
-	void insertHousehold(HouseholdEntity householdEntity);
+	void insertHousehold(Households householdEntity);
 
 	/**
 	 * 修改住户信息
 	 * 
 	 * @param householdEntity
 	 */
-	void updateHousehold(HouseholdEntity householdEntity);
+	void updateHousehold(Households householdEntity);
 
 	/**
 	 * 删除住户信息
 	 * 
-	 * @param hids
+	 * @param hid
 	 */
-	void deleteHouseholds(List<String> hids);
+	void deleteHouseholds(Integer hid);
 
 }

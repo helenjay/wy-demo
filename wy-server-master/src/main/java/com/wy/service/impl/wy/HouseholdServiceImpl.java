@@ -1,47 +1,44 @@
 package com.wy.service.impl.wy;
 
-import com.wy.dao.HouseholdDao;
-import com.wy.dao.MenuDao;
-import com.wy.dao.RoleDao;
-import com.wy.model.sys.HouseholdEntity;
-import com.wy.model.sys.MenuEntity;
-import com.wy.service.sys.MenuService;
+import com.wy.dao.HouseholdsMapper;
+import com.wy.model.sys.Households;
 import com.wy.service.wy.HouseholdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service("householdServiceImpl")
 public class HouseholdServiceImpl implements HouseholdService {
 
 	@Autowired
-	private HouseholdDao householdDao;
+	private HouseholdsMapper householdDao;
 
 
 	@Override
-	public List<HouseholdEntity> householdList(int pageSize, int start, String householdId) {
-		return householdDao.householdList(pageSize,start,householdId);
+	public List<Households> householdList(int pageSize, int start, Integer id) {
+		return householdDao.householdList(pageSize,start,id);
 	}
 
 	@Override
-	public Integer householdSize(int pageSize, int start, String householdId) {
-		return householdDao.householdSize(pageSize,start,householdId);
+	public Integer householdSize(int pageSize, int start, Integer id) {
+		return householdDao.householdSize(pageSize,start,id);
+	}
+
+	@Transactional
+	@Override
+	public void insertHousehold(Households householdEntity) {
+		householdDao.insert(householdEntity);
 	}
 
 	@Override
-	public void insertHousehold(HouseholdEntity householdEntity) {
-		householdDao.insertHousehold(householdEntity);
+	public void updateHousehold(Households householdEntity) {
+		householdDao.updateByPrimaryKey(householdEntity);
 	}
 
 	@Override
-	public void updateHousehold(HouseholdEntity householdEntity) {
-		householdDao.updateHousehold(householdEntity);
-	}
-
-	@Override
-	public void deleteHouseholds(List<String> hids) {
-		householdDao.deleteHousehold(hids);
+	public void deleteHouseholds(Integer hid) {
+		householdDao.deleteByPrimaryKey(hid);
 	}
 }

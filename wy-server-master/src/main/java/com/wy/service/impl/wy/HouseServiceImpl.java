@@ -1,7 +1,7 @@
 package com.wy.service.impl.wy;
 
-import com.wy.dao.HouseDao;
-import com.wy.model.sys.HouseEntity;
+import com.wy.dao.HousesMapper;
+import com.wy.model.sys.Houses;
 import com.wy.service.wy.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,31 +12,31 @@ import java.util.List;
 public class HouseServiceImpl implements HouseService {
 
 	@Autowired
-	private HouseDao houseDao;
+	private HousesMapper houseDao;
 
 
 	@Override
-	public List<HouseEntity> houseList(int pageSize, int start, String houseId, String houseName, String houseNo) {
-		return houseDao.houseList(pageSize,start,houseId,houseName,houseNo);
+	public List<Houses> houseList(int pageSize, int start) {
+		return houseDao.houseList(pageSize,start);
 	}
 
 	@Override
-	public Integer houseSize(String houseId, String houseName, String houseNo) {
-		return houseDao.householdSize(houseId,houseName,houseNo);
+	public Integer houseSize(int pageSize, int start) {
+		return houseDao.houseSize(pageSize,start);
 	}
 
 	@Override
-	public void insertHouse(HouseEntity HouseEntity) {
-		houseDao.insertHouse(HouseEntity);
+	public void insertHouse(Houses houses) {
+		houseDao.insert(houses);
 	}
 
 	@Override
-	public void updateHouse(HouseEntity HouseEntity) {
-		houseDao.updateHouse(HouseEntity);
+	public void updateHouse(Houses houses) {
+		houseDao.updateByPrimaryKey(houses);
 	}
 
 	@Override
-	public void deleteHouses(List<String> hids) {
-		houseDao.deleteHouse(hids);
+	public void deleteHouses(Integer hid) {
+		houseDao.deleteByPrimaryKey(hid);
 	}
 }
