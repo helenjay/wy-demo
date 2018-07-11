@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.HousesMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.Houses" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="village_code" property="villageCode" jdbcType="VARCHAR" />
+    <result column="building_code" property="buildingCode" jdbcType="VARCHAR" />
+    <result column="house_code" property="houseCode" jdbcType="VARCHAR" />
+    <result column="house_name" property="houseName" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="house_type" property="houseType" jdbcType="VARCHAR" />
+    <result column="house_area" property="houseArea" jdbcType="DOUBLE" />
+    <result column="house_actual" property="houseActual" jdbcType="DOUBLE" />
+    <result column="face" property="face" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, building_id, village_code, building_code, house_code, house_name, floor, house_type, 
+    house_area, house_actual, face, type, ext1, ext2, ext3, ext4, ext5, ext6
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_houses
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_houses
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.Houses" >
+    insert into t_houses (id, building_id, village_code, 
+      building_code, house_code, house_name, 
+      floor, house_type, house_area, 
+      house_actual, face, type, 
+      ext1, ext2, ext3, ext4, 
+      ext5, ext6)
+    values (#{id,jdbcType=INTEGER}, #{buildingId,jdbcType=INTEGER}, #{villageCode,jdbcType=VARCHAR}, 
+      #{buildingCode,jdbcType=VARCHAR}, #{houseCode,jdbcType=VARCHAR}, #{houseName,jdbcType=VARCHAR}, 
+      #{floor,jdbcType=VARCHAR}, #{houseType,jdbcType=VARCHAR}, #{houseArea,jdbcType=DOUBLE}, 
+      #{houseActual,jdbcType=DOUBLE}, #{face,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{ext1,jdbcType=INTEGER}, #{ext2,jdbcType=INTEGER}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, 
+      #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.Houses" >
+    insert into t_houses
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="villageCode != null" >
+        village_code,
+      </if>
+      <if test="buildingCode != null" >
+        building_code,
+      </if>
+      <if test="houseCode != null" >
+        house_code,
+      </if>
+      <if test="houseName != null" >
+        house_name,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="houseType != null" >
+        house_type,
+      </if>
+      <if test="houseArea != null" >
+        house_area,
+      </if>
+      <if test="houseActual != null" >
+        house_actual,
+      </if>
+      <if test="face != null" >
+        face,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="villageCode != null" >
+        #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseCode != null" >
+        #{houseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseName != null" >
+        #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="houseArea != null" >
+        #{houseArea,jdbcType=DOUBLE},
+      </if>
+      <if test="houseActual != null" >
+        #{houseActual,jdbcType=DOUBLE},
+      </if>
+      <if test="face != null" >
+        #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.Houses" >
+    update t_houses
+    <set >
+      <if test="buildingId != null" >
+        building_id = #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="villageCode != null" >
+        village_code = #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        building_code = #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseCode != null" >
+        house_code = #{houseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseName != null" >
+        house_name = #{houseName,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="houseType != null" >
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="houseArea != null" >
+        house_area = #{houseArea,jdbcType=DOUBLE},
+      </if>
+      <if test="houseActual != null" >
+        house_actual = #{houseActual,jdbcType=DOUBLE},
+      </if>
+      <if test="face != null" >
+        face = #{face,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.Houses" >
+    update t_houses
+    set building_id = #{buildingId,jdbcType=INTEGER},
+      village_code = #{villageCode,jdbcType=VARCHAR},
+      building_code = #{buildingCode,jdbcType=VARCHAR},
+      house_code = #{houseCode,jdbcType=VARCHAR},
+      house_name = #{houseName,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      house_type = #{houseType,jdbcType=VARCHAR},
+      house_area = #{houseArea,jdbcType=DOUBLE},
+      house_actual = #{houseActual,jdbcType=DOUBLE},
+      face = #{face,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 获取住户列表 -->
+  <select id="houseList" resultMap="BaseResultMap">
+    <![CDATA[select * from t_houses]]>
+    <!--<where>-->
+      <!--<if test="id != null and id != ''">-->
+        <!--id = #{id}-->
+      <!--</if>-->
+    <!--</where>-->
+    <![CDATA[ order by id ]]>
+    <if test="pageSize != null and start != null ">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+
+  <select id="houseSize" resultType="Integer">
+    <![CDATA[select count(1) from t_houses]]>
+    <!--<where>-->
+      <!--<if test="id != null and id != ''">-->
+        <!--id = #{id}-->
+      <!--</if>-->
+    <!--</where>-->
+    <if test="pageSize != null and start != null ">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+</mapper>

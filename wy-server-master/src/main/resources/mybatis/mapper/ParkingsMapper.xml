@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.ParkingsMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.Parkings" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="househould_id" property="househouldId" jdbcType="VARCHAR" />
+    <result column="parking_code" property="parkingCode" jdbcType="VARCHAR" />
+    <result column="plate_num" property="plateNum" jdbcType="VARCHAR" />
+    <result column="expiration" property="expiration" jdbcType="VARCHAR" />
+    <result column="parking_type" property="parkingType" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, househould_id, parking_code, plate_num, expiration, parking_type, status, ext1, 
+    ext2, ext3, ext4, ext5, ext6
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_parkings
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_parkings
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.Parkings" >
+    insert into t_parkings (id, househould_id, parking_code, 
+      plate_num, expiration, parking_type, 
+      status, ext1, ext2, 
+      ext3, ext4, ext5, ext6
+      )
+    values (#{id,jdbcType=INTEGER}, #{househouldId,jdbcType=VARCHAR}, #{parkingCode,jdbcType=VARCHAR}, 
+      #{plateNum,jdbcType=VARCHAR}, #{expiration,jdbcType=VARCHAR}, #{parkingType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{ext1,jdbcType=INTEGER}, #{ext2,jdbcType=INTEGER}, 
+      #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.Parkings" >
+    insert into t_parkings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="househouldId != null" >
+        househould_id,
+      </if>
+      <if test="parkingCode != null" >
+        parking_code,
+      </if>
+      <if test="plateNum != null" >
+        plate_num,
+      </if>
+      <if test="expiration != null" >
+        expiration,
+      </if>
+      <if test="parkingType != null" >
+        parking_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="househouldId != null" >
+        #{househouldId,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingCode != null" >
+        #{parkingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNum != null" >
+        #{plateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expiration != null" >
+        #{expiration,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingType != null" >
+        #{parkingType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.Parkings" >
+    update t_parkings
+    <set >
+      <if test="househouldId != null" >
+        househould_id = #{househouldId,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingCode != null" >
+        parking_code = #{parkingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="plateNum != null" >
+        plate_num = #{plateNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expiration != null" >
+        expiration = #{expiration,jdbcType=VARCHAR},
+      </if>
+      <if test="parkingType != null" >
+        parking_type = #{parkingType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.Parkings" >
+    update t_parkings
+    set househould_id = #{househouldId,jdbcType=VARCHAR},
+      parking_code = #{parkingCode,jdbcType=VARCHAR},
+      plate_num = #{plateNum,jdbcType=VARCHAR},
+      expiration = #{expiration,jdbcType=VARCHAR},
+      parking_type = #{parkingType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

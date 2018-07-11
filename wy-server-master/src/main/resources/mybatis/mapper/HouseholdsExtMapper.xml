@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.HouseholdsExtMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.HouseholdsExt" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="house_id" property="houseId" jdbcType="VARCHAR" />
+    <result column="village_code" property="villageCode" jdbcType="VARCHAR" />
+    <result column="building_code" property="buildingCode" jdbcType="VARCHAR" />
+    <result column="house_no" property="houseNo" jdbcType="VARCHAR" />
+    <result column="househould_id" property="househouldId" jdbcType="VARCHAR" />
+    <result column="household_name" property="householdName" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="nation_code" property="nationCode" jdbcType="VARCHAR" />
+    <result column="origin" property="origin" jdbcType="VARCHAR" />
+    <result column="origin_code" property="originCode" jdbcType="VARCHAR" />
+    <result column="domicile" property="domicile" jdbcType="VARCHAR" />
+    <result column="domicile_code" property="domicileCode" jdbcType="VARCHAR" />
+    <result column="street_code" property="streetCode" jdbcType="VARCHAR" />
+    <result column="domicile_road_name" property="domicileRoadName" jdbcType="VARCHAR" />
+    <result column="domicile_road_code" property="domicileRoadCode" jdbcType="VARCHAR" />
+    <result column="domicile_detail_address" property="domicileDetailAddress" jdbcType="VARCHAR" />
+    <result column="domicile_address" property="domicileAddress" jdbcType="VARCHAR" />
+    <result column="residence" property="residence" jdbcType="VARCHAR" />
+    <result column="residence_code" property="residenceCode" jdbcType="VARCHAR" />
+    <result column="residence_road_name" property="residenceRoadName" jdbcType="VARCHAR" />
+    <result column="residence_road_code" property="residenceRoadCode" jdbcType="VARCHAR" />
+    <result column="residence_detail_address" property="residenceDetailAddress" jdbcType="VARCHAR" />
+    <result column="residence_address" property="residenceAddress" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="education_code" property="educationCode" jdbcType="VARCHAR" />
+    <result column="political" property="political" jdbcType="VARCHAR" />
+    <result column="political_code" property="politicalCode" jdbcType="VARCHAR" />
+    <result column="marital_status" property="maritalStatus" jdbcType="VARCHAR" />
+    <result column="marital_status_code" property="maritalStatusCode" jdbcType="VARCHAR" />
+    <result column="spouse_name" property="spouseName" jdbcType="VARCHAR" />
+    <result column="spouse_no" property="spouseNo" jdbcType="VARCHAR" />
+    <result column="nationality" property="nationality" jdbcType="VARCHAR" />
+    <result column="nationality_code" property="nationalityCode" jdbcType="VARCHAR" />
+    <result column="entry_time" property="entryTime" jdbcType="TIMESTAMP" />
+    <result column="surname_eng" property="surnameEng" jdbcType="VARCHAR" />
+    <result column="name_eng" property="nameEng" jdbcType="VARCHAR" />
+    <result column="phone_no" property="phoneNo" jdbcType="VARCHAR" />
+    <result column="id_card_pic" property="idCardPic" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="SMALLINT" />
+    <result column="rowTime" property="rowtime" jdbcType="TIMESTAMP" />
+    <result column="mrowTime" property="mrowtime" jdbcType="TIMESTAMP" />
+    <result column="source_syrk" property="sourceSyrk" jdbcType="SMALLINT" />
+    <result column="source_carport" property="sourceCarport" jdbcType="SMALLINT" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+    <result column="ext7" property="ext7" jdbcType="VARCHAR" />
+    <result column="ext8" property="ext8" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, house_id, village_code, building_code, house_no, househould_id, household_name, 
+    nation, nation_code, origin, origin_code, domicile, domicile_code, street_code, domicile_road_name, 
+    domicile_road_code, domicile_detail_address, domicile_address, residence, residence_code, 
+    residence_road_name, residence_road_code, residence_detail_address, residence_address, 
+    education, education_code, political, political_code, marital_status, marital_status_code, 
+    spouse_name, spouse_no, nationality, nationality_code, entry_time, surname_eng, name_eng, 
+    phone_no, id_card_pic, source, rowTime, mrowTime, source_syrk, source_carport, create_time, 
+    modify_time, creater, modifier, ext1, ext2, ext3, ext4, ext5, ext6, ext7, ext8
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_households_ext
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_households_ext
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.HouseholdsExt" >
+    insert into t_households_ext (id, house_id, village_code, 
+      building_code, house_no, househould_id, 
+      household_name, nation, nation_code, 
+      origin, origin_code, domicile, 
+      domicile_code, street_code, domicile_road_name, 
+      domicile_road_code, domicile_detail_address, 
+      domicile_address, residence, residence_code, 
+      residence_road_name, residence_road_code, residence_detail_address, 
+      residence_address, education, education_code, 
+      political, political_code, marital_status, 
+      marital_status_code, spouse_name, spouse_no, 
+      nationality, nationality_code, entry_time, 
+      surname_eng, name_eng, phone_no, 
+      id_card_pic, source, rowTime, 
+      mrowTime, source_syrk, source_carport, 
+      create_time, modify_time, creater, 
+      modifier, ext1, ext2, 
+      ext3, ext4, ext5, ext6, 
+      ext7, ext8)
+    values (#{id,jdbcType=INTEGER}, #{houseId,jdbcType=VARCHAR}, #{villageCode,jdbcType=VARCHAR}, 
+      #{buildingCode,jdbcType=VARCHAR}, #{houseNo,jdbcType=VARCHAR}, #{househouldId,jdbcType=VARCHAR}, 
+      #{householdName,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{nationCode,jdbcType=VARCHAR}, 
+      #{origin,jdbcType=VARCHAR}, #{originCode,jdbcType=VARCHAR}, #{domicile,jdbcType=VARCHAR}, 
+      #{domicileCode,jdbcType=VARCHAR}, #{streetCode,jdbcType=VARCHAR}, #{domicileRoadName,jdbcType=VARCHAR}, 
+      #{domicileRoadCode,jdbcType=VARCHAR}, #{domicileDetailAddress,jdbcType=VARCHAR}, 
+      #{domicileAddress,jdbcType=VARCHAR}, #{residence,jdbcType=VARCHAR}, #{residenceCode,jdbcType=VARCHAR}, 
+      #{residenceRoadName,jdbcType=VARCHAR}, #{residenceRoadCode,jdbcType=VARCHAR}, #{residenceDetailAddress,jdbcType=VARCHAR}, 
+      #{residenceAddress,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{educationCode,jdbcType=VARCHAR}, 
+      #{political,jdbcType=VARCHAR}, #{politicalCode,jdbcType=VARCHAR}, #{maritalStatus,jdbcType=VARCHAR}, 
+      #{maritalStatusCode,jdbcType=VARCHAR}, #{spouseName,jdbcType=VARCHAR}, #{spouseNo,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{nationalityCode,jdbcType=VARCHAR}, #{entryTime,jdbcType=TIMESTAMP}, 
+      #{surnameEng,jdbcType=VARCHAR}, #{nameEng,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
+      #{idCardPic,jdbcType=VARCHAR}, #{source,jdbcType=SMALLINT}, #{rowtime,jdbcType=TIMESTAMP}, 
+      #{mrowtime,jdbcType=TIMESTAMP}, #{sourceSyrk,jdbcType=SMALLINT}, #{sourceCarport,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE}, #{creater,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{ext1,jdbcType=INTEGER}, #{ext2,jdbcType=INTEGER}, 
+      #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR}, 
+      #{ext7,jdbcType=VARCHAR}, #{ext8,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.HouseholdsExt" >
+    insert into t_households_ext
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="villageCode != null" >
+        village_code,
+      </if>
+      <if test="buildingCode != null" >
+        building_code,
+      </if>
+      <if test="houseNo != null" >
+        house_no,
+      </if>
+      <if test="househouldId != null" >
+        househould_id,
+      </if>
+      <if test="householdName != null" >
+        household_name,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="nationCode != null" >
+        nation_code,
+      </if>
+      <if test="origin != null" >
+        origin,
+      </if>
+      <if test="originCode != null" >
+        origin_code,
+      </if>
+      <if test="domicile != null" >
+        domicile,
+      </if>
+      <if test="domicileCode != null" >
+        domicile_code,
+      </if>
+      <if test="streetCode != null" >
+        street_code,
+      </if>
+      <if test="domicileRoadName != null" >
+        domicile_road_name,
+      </if>
+      <if test="domicileRoadCode != null" >
+        domicile_road_code,
+      </if>
+      <if test="domicileDetailAddress != null" >
+        domicile_detail_address,
+      </if>
+      <if test="domicileAddress != null" >
+        domicile_address,
+      </if>
+      <if test="residence != null" >
+        residence,
+      </if>
+      <if test="residenceCode != null" >
+        residence_code,
+      </if>
+      <if test="residenceRoadName != null" >
+        residence_road_name,
+      </if>
+      <if test="residenceRoadCode != null" >
+        residence_road_code,
+      </if>
+      <if test="residenceDetailAddress != null" >
+        residence_detail_address,
+      </if>
+      <if test="residenceAddress != null" >
+        residence_address,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="educationCode != null" >
+        education_code,
+      </if>
+      <if test="political != null" >
+        political,
+      </if>
+      <if test="politicalCode != null" >
+        political_code,
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status,
+      </if>
+      <if test="maritalStatusCode != null" >
+        marital_status_code,
+      </if>
+      <if test="spouseName != null" >
+        spouse_name,
+      </if>
+      <if test="spouseNo != null" >
+        spouse_no,
+      </if>
+      <if test="nationality != null" >
+        nationality,
+      </if>
+      <if test="nationalityCode != null" >
+        nationality_code,
+      </if>
+      <if test="entryTime != null" >
+        entry_time,
+      </if>
+      <if test="surnameEng != null" >
+        surname_eng,
+      </if>
+      <if test="nameEng != null" >
+        name_eng,
+      </if>
+      <if test="phoneNo != null" >
+        phone_no,
+      </if>
+      <if test="idCardPic != null" >
+        id_card_pic,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="rowtime != null" >
+        rowTime,
+      </if>
+      <if test="mrowtime != null" >
+        mrowTime,
+      </if>
+      <if test="sourceSyrk != null" >
+        source_syrk,
+      </if>
+      <if test="sourceCarport != null" >
+        source_carport,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+      <if test="ext7 != null" >
+        ext7,
+      </if>
+      <if test="ext8 != null" >
+        ext8,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="villageCode != null" >
+        #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNo != null" >
+        #{houseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="househouldId != null" >
+        #{househouldId,jdbcType=VARCHAR},
+      </if>
+      <if test="householdName != null" >
+        #{householdName,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationCode != null" >
+        #{nationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="originCode != null" >
+        #{originCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null" >
+        #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileCode != null" >
+        #{domicileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetCode != null" >
+        #{streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileRoadName != null" >
+        #{domicileRoadName,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileRoadCode != null" >
+        #{domicileRoadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileDetailAddress != null" >
+        #{domicileDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileAddress != null" >
+        #{domicileAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null" >
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceCode != null" >
+        #{residenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceRoadName != null" >
+        #{residenceRoadName,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceRoadCode != null" >
+        #{residenceRoadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceDetailAddress != null" >
+        #{residenceDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceAddress != null" >
+        #{residenceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCode != null" >
+        #{educationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalCode != null" >
+        #{politicalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatusCode != null" >
+        #{maritalStatusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseNo != null" >
+        #{spouseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalityCode != null" >
+        #{nationalityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surnameEng != null" >
+        #{surnameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEng != null" >
+        #{nameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardPic != null" >
+        #{idCardPic,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="rowtime != null" >
+        #{rowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrowtime != null" >
+        #{mrowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceSyrk != null" >
+        #{sourceSyrk,jdbcType=SMALLINT},
+      </if>
+      <if test="sourceCarport != null" >
+        #{sourceCarport,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="ext7 != null" >
+        #{ext7,jdbcType=VARCHAR},
+      </if>
+      <if test="ext8 != null" >
+        #{ext8,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.HouseholdsExt" >
+    update t_households_ext
+    <set >
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="villageCode != null" >
+        village_code = #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        building_code = #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNo != null" >
+        house_no = #{houseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="househouldId != null" >
+        househould_id = #{househouldId,jdbcType=VARCHAR},
+      </if>
+      <if test="householdName != null" >
+        household_name = #{householdName,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationCode != null" >
+        nation_code = #{nationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null" >
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="originCode != null" >
+        origin_code = #{originCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicile != null" >
+        domicile = #{domicile,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileCode != null" >
+        domicile_code = #{domicileCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetCode != null" >
+        street_code = #{streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileRoadName != null" >
+        domicile_road_name = #{domicileRoadName,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileRoadCode != null" >
+        domicile_road_code = #{domicileRoadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileDetailAddress != null" >
+        domicile_detail_address = #{domicileDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="domicileAddress != null" >
+        domicile_address = #{domicileAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null" >
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceCode != null" >
+        residence_code = #{residenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceRoadName != null" >
+        residence_road_name = #{residenceRoadName,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceRoadCode != null" >
+        residence_road_code = #{residenceRoadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceDetailAddress != null" >
+        residence_detail_address = #{residenceDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="residenceAddress != null" >
+        residence_address = #{residenceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCode != null" >
+        education_code = #{educationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="political != null" >
+        political = #{political,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalCode != null" >
+        political_code = #{politicalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null" >
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatusCode != null" >
+        marital_status_code = #{maritalStatusCode,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseName != null" >
+        spouse_name = #{spouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="spouseNo != null" >
+        spouse_no = #{spouseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nationalityCode != null" >
+        nationality_code = #{nationalityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null" >
+        entry_time = #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surnameEng != null" >
+        surname_eng = #{surnameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="nameEng != null" >
+        name_eng = #{nameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        phone_no = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardPic != null" >
+        id_card_pic = #{idCardPic,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="rowtime != null" >
+        rowTime = #{rowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrowtime != null" >
+        mrowTime = #{mrowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sourceSyrk != null" >
+        source_syrk = #{sourceSyrk,jdbcType=SMALLINT},
+      </if>
+      <if test="sourceCarport != null" >
+        source_carport = #{sourceCarport,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="ext7 != null" >
+        ext7 = #{ext7,jdbcType=VARCHAR},
+      </if>
+      <if test="ext8 != null" >
+        ext8 = #{ext8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.HouseholdsExt" >
+    update t_households_ext
+    set house_id = #{houseId,jdbcType=VARCHAR},
+      village_code = #{villageCode,jdbcType=VARCHAR},
+      building_code = #{buildingCode,jdbcType=VARCHAR},
+      house_no = #{houseNo,jdbcType=VARCHAR},
+      househould_id = #{househouldId,jdbcType=VARCHAR},
+      household_name = #{householdName,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      nation_code = #{nationCode,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      origin_code = #{originCode,jdbcType=VARCHAR},
+      domicile = #{domicile,jdbcType=VARCHAR},
+      domicile_code = #{domicileCode,jdbcType=VARCHAR},
+      street_code = #{streetCode,jdbcType=VARCHAR},
+      domicile_road_name = #{domicileRoadName,jdbcType=VARCHAR},
+      domicile_road_code = #{domicileRoadCode,jdbcType=VARCHAR},
+      domicile_detail_address = #{domicileDetailAddress,jdbcType=VARCHAR},
+      domicile_address = #{domicileAddress,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      residence_code = #{residenceCode,jdbcType=VARCHAR},
+      residence_road_name = #{residenceRoadName,jdbcType=VARCHAR},
+      residence_road_code = #{residenceRoadCode,jdbcType=VARCHAR},
+      residence_detail_address = #{residenceDetailAddress,jdbcType=VARCHAR},
+      residence_address = #{residenceAddress,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      education_code = #{educationCode,jdbcType=VARCHAR},
+      political = #{political,jdbcType=VARCHAR},
+      political_code = #{politicalCode,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      marital_status_code = #{maritalStatusCode,jdbcType=VARCHAR},
+      spouse_name = #{spouseName,jdbcType=VARCHAR},
+      spouse_no = #{spouseNo,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      nationality_code = #{nationalityCode,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=TIMESTAMP},
+      surname_eng = #{surnameEng,jdbcType=VARCHAR},
+      name_eng = #{nameEng,jdbcType=VARCHAR},
+      phone_no = #{phoneNo,jdbcType=VARCHAR},
+      id_card_pic = #{idCardPic,jdbcType=VARCHAR},
+      source = #{source,jdbcType=SMALLINT},
+      rowTime = #{rowtime,jdbcType=TIMESTAMP},
+      mrowTime = #{mrowtime,jdbcType=TIMESTAMP},
+      source_syrk = #{sourceSyrk,jdbcType=SMALLINT},
+      source_carport = #{sourceCarport,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=DATE},
+      modify_time = #{modifyTime,jdbcType=DATE},
+      creater = #{creater,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR},
+      ext7 = #{ext7,jdbcType=VARCHAR},
+      ext8 = #{ext8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

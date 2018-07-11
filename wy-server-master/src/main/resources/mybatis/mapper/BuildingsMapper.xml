@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.BuildingsMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.Buildings" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="village_code" property="villageCode" jdbcType="VARCHAR" />
+    <result column="building_code" property="buildingCode" jdbcType="VARCHAR" />
+    <result column="building_name" property="buildingName" jdbcType="VARCHAR" />
+    <result column="floor_total" property="floorTotal" jdbcType="INTEGER" />
+    <result column="house_total" property="houseTotal" jdbcType="INTEGER" />
+    <result column="coord_type" property="coordType" jdbcType="SMALLINT" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="DOUBLE" />
+    <result column="lat" property="lat" jdbcType="DOUBLE" />
+    <result column="row_time" property="rowTime" jdbcType="TIMESTAMP" />
+    <result column="mrow_time" property="mrowTime" jdbcType="TIMESTAMP" />
+    <result column="architectural_age" property="architecturalAge" jdbcType="VARCHAR" />
+    <result column="property_rights" property="propertyRights" jdbcType="VARCHAR" />
+    <result column="building_level" property="buildingLevel" jdbcType="VARCHAR" />
+    <result column="has_left" property="hasLeft" jdbcType="VARCHAR" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_id, village_code, building_code, building_name, floor_total, house_total, 
+    coord_type, note, lon, lat, row_time, mrow_time, architectural_age, property_rights, 
+    building_level, has_left, image1, ext1, ext2, ext3, ext4, ext5, ext6
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_buildings
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_buildings
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.Buildings" >
+    insert into t_buildings (id, project_id, village_code, 
+      building_code, building_name, floor_total, 
+      house_total, coord_type, note, 
+      lon, lat, row_time, 
+      mrow_time, architectural_age, property_rights, 
+      building_level, has_left, image1, 
+      ext1, ext2, ext3, ext4, 
+      ext5, ext6)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{villageCode,jdbcType=VARCHAR}, 
+      #{buildingCode,jdbcType=VARCHAR}, #{buildingName,jdbcType=VARCHAR}, #{floorTotal,jdbcType=INTEGER}, 
+      #{houseTotal,jdbcType=INTEGER}, #{coordType,jdbcType=SMALLINT}, #{note,jdbcType=VARCHAR}, 
+      #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{rowTime,jdbcType=TIMESTAMP}, 
+      #{mrowTime,jdbcType=TIMESTAMP}, #{architecturalAge,jdbcType=VARCHAR}, #{propertyRights,jdbcType=VARCHAR}, 
+      #{buildingLevel,jdbcType=VARCHAR}, #{hasLeft,jdbcType=VARCHAR}, #{image1,jdbcType=VARCHAR}, 
+      #{ext1,jdbcType=INTEGER}, #{ext2,jdbcType=INTEGER}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, 
+      #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.Buildings" >
+    insert into t_buildings
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="villageCode != null" >
+        village_code,
+      </if>
+      <if test="buildingCode != null" >
+        building_code,
+      </if>
+      <if test="buildingName != null" >
+        building_name,
+      </if>
+      <if test="floorTotal != null" >
+        floor_total,
+      </if>
+      <if test="houseTotal != null" >
+        house_total,
+      </if>
+      <if test="coordType != null" >
+        coord_type,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="rowTime != null" >
+        row_time,
+      </if>
+      <if test="mrowTime != null" >
+        mrow_time,
+      </if>
+      <if test="architecturalAge != null" >
+        architectural_age,
+      </if>
+      <if test="propertyRights != null" >
+        property_rights,
+      </if>
+      <if test="buildingLevel != null" >
+        building_level,
+      </if>
+      <if test="hasLeft != null" >
+        has_left,
+      </if>
+      <if test="image1 != null" >
+        image1,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="villageCode != null" >
+        #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingName != null" >
+        #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="floorTotal != null" >
+        #{floorTotal,jdbcType=INTEGER},
+      </if>
+      <if test="houseTotal != null" >
+        #{houseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="coordType != null" >
+        #{coordType,jdbcType=SMALLINT},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="rowTime != null" >
+        #{rowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrowTime != null" >
+        #{mrowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="architecturalAge != null" >
+        #{architecturalAge,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyRights != null" >
+        #{propertyRights,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingLevel != null" >
+        #{buildingLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="hasLeft != null" >
+        #{hasLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.Buildings" >
+    update t_buildings
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="villageCode != null" >
+        village_code = #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        building_code = #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingName != null" >
+        building_name = #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="floorTotal != null" >
+        floor_total = #{floorTotal,jdbcType=INTEGER},
+      </if>
+      <if test="houseTotal != null" >
+        house_total = #{houseTotal,jdbcType=INTEGER},
+      </if>
+      <if test="coordType != null" >
+        coord_type = #{coordType,jdbcType=SMALLINT},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="rowTime != null" >
+        row_time = #{rowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mrowTime != null" >
+        mrow_time = #{mrowTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="architecturalAge != null" >
+        architectural_age = #{architecturalAge,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyRights != null" >
+        property_rights = #{propertyRights,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingLevel != null" >
+        building_level = #{buildingLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="hasLeft != null" >
+        has_left = #{hasLeft,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.Buildings" >
+    update t_buildings
+    set project_id = #{projectId,jdbcType=INTEGER},
+      village_code = #{villageCode,jdbcType=VARCHAR},
+      building_code = #{buildingCode,jdbcType=VARCHAR},
+      building_name = #{buildingName,jdbcType=VARCHAR},
+      floor_total = #{floorTotal,jdbcType=INTEGER},
+      house_total = #{houseTotal,jdbcType=INTEGER},
+      coord_type = #{coordType,jdbcType=SMALLINT},
+      note = #{note,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=DOUBLE},
+      lat = #{lat,jdbcType=DOUBLE},
+      row_time = #{rowTime,jdbcType=TIMESTAMP},
+      mrow_time = #{mrowTime,jdbcType=TIMESTAMP},
+      architectural_age = #{architecturalAge,jdbcType=VARCHAR},
+      property_rights = #{propertyRights,jdbcType=VARCHAR},
+      building_level = #{buildingLevel,jdbcType=VARCHAR},
+      has_left = #{hasLeft,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

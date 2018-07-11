@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.ResidenceMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.Residence" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="village_code" property="villageCode" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district_code" property="districtCode" jdbcType="VARCHAR" />
+    <result column="street_code" property="streetCode" jdbcType="VARCHAR" />
+    <result column="road_code" property="roadCode" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="police_station" property="policeStation" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="DOUBLE" />
+    <result column="lat" property="lat" jdbcType="DOUBLE" />
+    <result column="alt" property="alt" jdbcType="DOUBLE" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="image1" property="image1" jdbcType="VARCHAR" />
+    <result column="building_num" property="buildingNum" jdbcType="INTEGER" />
+    <result column="house_num" property="houseNum" jdbcType="INTEGER" />
+    <result column="resident_num" property="residentNum" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
+    <result column="map_center" property="mapCenter" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wy.model.sys.Residence" extends="BaseResultMap" >
+    <result column="geometry" property="geometry" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, village_code, project_name, province, city, district_code, street_code, road_code, 
+    address_detail, police_station, lon, lat, alt, pic_url, image1, building_num, house_num, 
+    resident_num, parent_id, pinyin, map_center, create_time, modify_time, ext1, ext2, 
+    ext3, ext4, ext5, ext6
+  </sql>
+  <sql id="Blob_Column_List" >
+    geometry
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_residence
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_residence
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.Residence" >
+    insert into t_residence (id, village_code, project_name, 
+      province, city, district_code, 
+      street_code, road_code, address_detail, 
+      police_station, lon, lat, 
+      alt, pic_url, image1, 
+      building_num, house_num, resident_num, 
+      parent_id, pinyin, map_center, 
+      create_time, modify_time, ext1, 
+      ext2, ext3, ext4, ext5, 
+      ext6, geometry)
+    values (#{id,jdbcType=INTEGER}, #{villageCode,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{districtCode,jdbcType=VARCHAR}, 
+      #{streetCode,jdbcType=VARCHAR}, #{roadCode,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{policeStation,jdbcType=VARCHAR}, #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, 
+      #{alt,jdbcType=DOUBLE}, #{picUrl,jdbcType=VARCHAR}, #{image1,jdbcType=VARCHAR}, 
+      #{buildingNum,jdbcType=INTEGER}, #{houseNum,jdbcType=INTEGER}, #{residentNum,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER}, #{pinyin,jdbcType=VARCHAR}, #{mapCenter,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE}, #{ext1,jdbcType=INTEGER}, 
+      #{ext2,jdbcType=INTEGER}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}, 
+      #{ext6,jdbcType=VARCHAR}, #{geometry,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.Residence" >
+    insert into t_residence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="villageCode != null" >
+        village_code,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="districtCode != null" >
+        district_code,
+      </if>
+      <if test="streetCode != null" >
+        street_code,
+      </if>
+      <if test="roadCode != null" >
+        road_code,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+      <if test="policeStation != null" >
+        police_station,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="alt != null" >
+        alt,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="image1 != null" >
+        image1,
+      </if>
+      <if test="buildingNum != null" >
+        building_num,
+      </if>
+      <if test="houseNum != null" >
+        house_num,
+      </if>
+      <if test="residentNum != null" >
+        resident_num,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="pinyin != null" >
+        pinyin,
+      </if>
+      <if test="mapCenter != null" >
+        map_center,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+      <if test="geometry != null" >
+        geometry,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="villageCode != null" >
+        #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetCode != null" >
+        #{streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roadCode != null" >
+        #{roadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="policeStation != null" >
+        #{policeStation,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="alt != null" >
+        #{alt,jdbcType=DOUBLE},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingNum != null" >
+        #{buildingNum,jdbcType=INTEGER},
+      </if>
+      <if test="houseNum != null" >
+        #{houseNum,jdbcType=INTEGER},
+      </if>
+      <if test="residentNum != null" >
+        #{residentNum,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null" >
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="mapCenter != null" >
+        #{mapCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="geometry != null" >
+        #{geometry,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.Residence" >
+    update t_residence
+    <set >
+      <if test="villageCode != null" >
+        village_code = #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtCode != null" >
+        district_code = #{districtCode,jdbcType=VARCHAR},
+      </if>
+      <if test="streetCode != null" >
+        street_code = #{streetCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roadCode != null" >
+        road_code = #{roadCode,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="policeStation != null" >
+        police_station = #{policeStation,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="alt != null" >
+        alt = #{alt,jdbcType=DOUBLE},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="image1 != null" >
+        image1 = #{image1,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingNum != null" >
+        building_num = #{buildingNum,jdbcType=INTEGER},
+      </if>
+      <if test="houseNum != null" >
+        house_num = #{houseNum,jdbcType=INTEGER},
+      </if>
+      <if test="residentNum != null" >
+        resident_num = #{residentNum,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pinyin != null" >
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="mapCenter != null" >
+        map_center = #{mapCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="geometry != null" >
+        geometry = #{geometry,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wy.model.sys.Residence" >
+    update t_residence
+    set village_code = #{villageCode,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      street_code = #{streetCode,jdbcType=VARCHAR},
+      road_code = #{roadCode,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      police_station = #{policeStation,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=DOUBLE},
+      lat = #{lat,jdbcType=DOUBLE},
+      alt = #{alt,jdbcType=DOUBLE},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      building_num = #{buildingNum,jdbcType=INTEGER},
+      house_num = #{houseNum,jdbcType=INTEGER},
+      resident_num = #{residentNum,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      map_center = #{mapCenter,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      modify_time = #{modifyTime,jdbcType=DATE},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR},
+      geometry = #{geometry,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.Residence" >
+    update t_residence
+    set village_code = #{villageCode,jdbcType=VARCHAR},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district_code = #{districtCode,jdbcType=VARCHAR},
+      street_code = #{streetCode,jdbcType=VARCHAR},
+      road_code = #{roadCode,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      police_station = #{policeStation,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=DOUBLE},
+      lat = #{lat,jdbcType=DOUBLE},
+      alt = #{alt,jdbcType=DOUBLE},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      image1 = #{image1,jdbcType=VARCHAR},
+      building_num = #{buildingNum,jdbcType=INTEGER},
+      house_num = #{houseNum,jdbcType=INTEGER},
+      resident_num = #{residentNum,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      map_center = #{mapCenter,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      modify_time = #{modifyTime,jdbcType=DATE},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

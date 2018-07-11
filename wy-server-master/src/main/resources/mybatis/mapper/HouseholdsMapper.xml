@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wy.dao.HouseholdsMapper" >
+  <resultMap id="BaseResultMap" type="com.wy.model.sys.Households" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="house_id" property="houseId" jdbcType="VARCHAR" />
+    <result column="village_code" property="villageCode" jdbcType="VARCHAR" />
+    <result column="building_code" property="buildingCode" jdbcType="VARCHAR" />
+    <result column="house_no" property="houseNo" jdbcType="VARCHAR" />
+    <result column="household_name" property="householdName" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="gender_code" property="genderCode" jdbcType="VARCHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="people_type" property="peopleType" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="identity_type" property="identityType" jdbcType="VARCHAR" />
+    <result column="credential_type" property="credentialType" jdbcType="VARCHAR" />
+    <result column="credential_type_cn" property="credentialTypeCn" jdbcType="VARCHAR" />
+    <result column="credential_no" property="credentialNo" jdbcType="VARCHAR" />
+    <result column="id_card_image1" property="idCardImage1" jdbcType="VARCHAR" />
+    <result column="id_card_image2" property="idCardImage2" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="current_image" property="currentImage" jdbcType="VARCHAR" />
+    <result column="auth_status" property="authStatus" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="creater" property="creater" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="INTEGER" />
+    <result column="ext2" property="ext2" jdbcType="INTEGER" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="ext5" property="ext5" jdbcType="VARCHAR" />
+    <result column="ext6" property="ext6" jdbcType="VARCHAR" />
+    <result column="ext7" property="ext7" jdbcType="VARCHAR" />
+    <result column="ext8" property="ext8" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, house_id, village_code, building_code, house_no, household_name, gender, gender_code, 
+    birth_date, mobile, address, people_type, company, department, identity_type, credential_type, 
+    credential_type_cn, credential_no, id_card_image1, id_card_image2, face_pic, current_image, 
+    auth_status, status, create_time, modify_time, creater, modifier, ext1, ext2, ext3, 
+    ext4, ext5, ext6, ext7, ext8
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_households
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_households
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wy.model.sys.Households" >
+    insert into t_households (id, house_id, village_code, 
+      building_code, house_no, household_name, 
+      gender, gender_code, birth_date, 
+      mobile, address, people_type, 
+      company, department, identity_type, 
+      credential_type, credential_type_cn, credential_no, 
+      id_card_image1, id_card_image2, face_pic, 
+      current_image, auth_status, status, 
+      create_time, modify_time, creater, 
+      modifier, ext1, ext2, 
+      ext3, ext4, ext5, ext6, 
+      ext7, ext8)
+    values (#{id,jdbcType=INTEGER}, #{houseId,jdbcType=VARCHAR}, #{villageCode,jdbcType=VARCHAR}, 
+      #{buildingCode,jdbcType=VARCHAR}, #{houseNo,jdbcType=VARCHAR}, #{householdName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{genderCode,jdbcType=VARCHAR}, #{birthDate,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{peopleType,jdbcType=VARCHAR}, 
+      #{company,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{identityType,jdbcType=VARCHAR}, 
+      #{credentialType,jdbcType=VARCHAR}, #{credentialTypeCn,jdbcType=VARCHAR}, #{credentialNo,jdbcType=VARCHAR}, 
+      #{idCardImage1,jdbcType=VARCHAR}, #{idCardImage2,jdbcType=VARCHAR}, #{facePic,jdbcType=VARCHAR}, 
+      #{currentImage,jdbcType=VARCHAR}, #{authStatus,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE}, #{creater,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{ext1,jdbcType=INTEGER}, #{ext2,jdbcType=INTEGER}, 
+      #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{ext5,jdbcType=VARCHAR}, #{ext6,jdbcType=VARCHAR}, 
+      #{ext7,jdbcType=VARCHAR}, #{ext8,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wy.model.sys.Households" >
+    insert into t_households
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="villageCode != null" >
+        village_code,
+      </if>
+      <if test="buildingCode != null" >
+        building_code,
+      </if>
+      <if test="houseNo != null" >
+        house_no,
+      </if>
+      <if test="householdName != null" >
+        household_name,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="genderCode != null" >
+        gender_code,
+      </if>
+      <if test="birthDate != null" >
+        birth_date,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="peopleType != null" >
+        people_type,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="identityType != null" >
+        identity_type,
+      </if>
+      <if test="credentialType != null" >
+        credential_type,
+      </if>
+      <if test="credentialTypeCn != null" >
+        credential_type_cn,
+      </if>
+      <if test="credentialNo != null" >
+        credential_no,
+      </if>
+      <if test="idCardImage1 != null" >
+        id_card_image1,
+      </if>
+      <if test="idCardImage2 != null" >
+        id_card_image2,
+      </if>
+      <if test="facePic != null" >
+        face_pic,
+      </if>
+      <if test="currentImage != null" >
+        current_image,
+      </if>
+      <if test="authStatus != null" >
+        auth_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="creater != null" >
+        creater,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="ext1 != null" >
+        ext1,
+      </if>
+      <if test="ext2 != null" >
+        ext2,
+      </if>
+      <if test="ext3 != null" >
+        ext3,
+      </if>
+      <if test="ext4 != null" >
+        ext4,
+      </if>
+      <if test="ext5 != null" >
+        ext5,
+      </if>
+      <if test="ext6 != null" >
+        ext6,
+      </if>
+      <if test="ext7 != null" >
+        ext7,
+      </if>
+      <if test="ext8 != null" >
+        ext8,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="villageCode != null" >
+        #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNo != null" >
+        #{houseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="householdName != null" >
+        #{householdName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="genderCode != null" >
+        #{genderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleType != null" >
+        #{peopleType,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="identityType != null" >
+        #{identityType,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialType != null" >
+        #{credentialType,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialTypeCn != null" >
+        #{credentialTypeCn,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialNo != null" >
+        #{credentialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImage1 != null" >
+        #{idCardImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImage2 != null" >
+        #{idCardImage2,jdbcType=VARCHAR},
+      </if>
+      <if test="facePic != null" >
+        #{facePic,jdbcType=VARCHAR},
+      </if>
+      <if test="currentImage != null" >
+        #{currentImage,jdbcType=VARCHAR},
+      </if>
+      <if test="authStatus != null" >
+        #{authStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="ext7 != null" >
+        #{ext7,jdbcType=VARCHAR},
+      </if>
+      <if test="ext8 != null" >
+        #{ext8,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wy.model.sys.Households" >
+    update t_households
+    <set >
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="villageCode != null" >
+        village_code = #{villageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingCode != null" >
+        building_code = #{buildingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="houseNo != null" >
+        house_no = #{houseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="householdName != null" >
+        household_name = #{householdName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="genderCode != null" >
+        gender_code = #{genderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDate != null" >
+        birth_date = #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleType != null" >
+        people_type = #{peopleType,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="identityType != null" >
+        identity_type = #{identityType,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialType != null" >
+        credential_type = #{credentialType,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialTypeCn != null" >
+        credential_type_cn = #{credentialTypeCn,jdbcType=VARCHAR},
+      </if>
+      <if test="credentialNo != null" >
+        credential_no = #{credentialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImage1 != null" >
+        id_card_image1 = #{idCardImage1,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImage2 != null" >
+        id_card_image2 = #{idCardImage2,jdbcType=VARCHAR},
+      </if>
+      <if test="facePic != null" >
+        face_pic = #{facePic,jdbcType=VARCHAR},
+      </if>
+      <if test="currentImage != null" >
+        current_image = #{currentImage,jdbcType=VARCHAR},
+      </if>
+      <if test="authStatus != null" >
+        auth_status = #{authStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="creater != null" >
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=INTEGER},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=INTEGER},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="ext5 != null" >
+        ext5 = #{ext5,jdbcType=VARCHAR},
+      </if>
+      <if test="ext6 != null" >
+        ext6 = #{ext6,jdbcType=VARCHAR},
+      </if>
+      <if test="ext7 != null" >
+        ext7 = #{ext7,jdbcType=VARCHAR},
+      </if>
+      <if test="ext8 != null" >
+        ext8 = #{ext8,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wy.model.sys.Households" >
+    update t_households
+    set house_id = #{houseId,jdbcType=VARCHAR},
+      village_code = #{villageCode,jdbcType=VARCHAR},
+      building_code = #{buildingCode,jdbcType=VARCHAR},
+      house_no = #{houseNo,jdbcType=VARCHAR},
+      household_name = #{householdName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      gender_code = #{genderCode,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      people_type = #{peopleType,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      identity_type = #{identityType,jdbcType=VARCHAR},
+      credential_type = #{credentialType,jdbcType=VARCHAR},
+      credential_type_cn = #{credentialTypeCn,jdbcType=VARCHAR},
+      credential_no = #{credentialNo,jdbcType=VARCHAR},
+      id_card_image1 = #{idCardImage1,jdbcType=VARCHAR},
+      id_card_image2 = #{idCardImage2,jdbcType=VARCHAR},
+      face_pic = #{facePic,jdbcType=VARCHAR},
+      current_image = #{currentImage,jdbcType=VARCHAR},
+      auth_status = #{authStatus,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      modify_time = #{modifyTime,jdbcType=DATE},
+      creater = #{creater,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=INTEGER},
+      ext2 = #{ext2,jdbcType=INTEGER},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      ext5 = #{ext5,jdbcType=VARCHAR},
+      ext6 = #{ext6,jdbcType=VARCHAR},
+      ext7 = #{ext7,jdbcType=VARCHAR},
+      ext8 = #{ext8,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 获取住户列表 -->
+  <select id="householdList" resultMap="BaseResultMap">
+    <![CDATA[select * from t_households]]>
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <!--<if test="householdName != null and householdName != ''">-->
+      <!--and householdName = #{householdName}-->
+      <!--</if>-->
+      <!--<if test="houseNo != null and houseNo != ''">-->
+      <!--and houseNo = #{houseNo}-->
+      <!--</if>-->
+    </where>
+    <![CDATA[ order by id ]]>
+    <if test="pageSize != null and start != null ">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+
+  <select id="householdSize" resultType="Integer">
+    <![CDATA[select count(1) from t_households]]>
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <!--<if test="householdName != null and householdName != ''">-->
+      <!--and householdName = #{householdName}-->
+      <!--</if>-->
+      <!--<if test="houseNo != null and houseNo != ''">-->
+      <!--and houseNo = #{houseNo}-->
+      <!--</if>-->
+    </where>
+    <if test="pageSize != null and start != null ">
+      limit #{start},#{pageSize}
+    </if>
+  </select>
+</mapper>
