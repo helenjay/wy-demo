@@ -39,15 +39,15 @@
                         </Form-item>
                     </Col>
                     <Col span="12">
-                        <Form-item label="住户性别:" prop="sex">
-                            <Input v-model="householdNew.sex" style="width: 204px"/>
+                        <Form-item label="住户性别:" prop="gender">
+                            <Input v-model="householdNew.gender" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <Form-item label="出生日期:" prop="birthday">
-                            <Input v-model="householdNew.birthday" style="width: 204px"/>
+                        <Form-item label="出生日期:" prop="birthDate">
+                            <Input v-model="householdNew.birthDate" style="width: 204px"/>
                         </Form-item>
                     </Col>
                     <Col span="12">
@@ -116,7 +116,7 @@
                 <!--</Form-item>-->
             </Form>
         </Modal>
-        <!--修改modal-->  
+        <!--修改modal-->
         <Modal :mask-closable="false" :visible.sync="modifyModal" :loading = "loading" v-model="modifyModal" width="600" title="修改" @on-ok="modifyOk('householdModify')" @on-cancel="cancel()">
             <Form ref="householdModify" :model="householdModify" :rules="ruleModify" :label-width="80" >
                 <Row>
@@ -126,21 +126,30 @@
                     </Form-item>
                     </Col>
                     <Col span="12">
-                    <Form-item label="住户性别:" prop="sex">
-                        <Input v-model="householdModify.sex" style="width: 204px"/>
+                    <Form-item label="住户性别:" prop="gender">
+                        <!--<Input v-model="householdModify.gender" style="width: 204px"/>-->
+                        <RadioGroup v-model="householdModify.gender" style="width: 204px">
+                            <Radio label="1">女</Radio>
+                            <Radio label="2">男</Radio>
+                            <Radio label="3">未知</Radio>
+                        </RadioGroup>
                     </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                    <Form-item label="出生日期:" prop="birthday">
-                        <Input v-model="householdModify.birthday" style="width: 204px"/>
-                    </Form-item>
+                        <Form-item label="出生日期:" prop="birthDate">
+                            <DatePicker type="date" placeholder="选择点击" style="width: 200px" v-model="householdModify.birthDate"></DatePicker>
+                        </Form-item>
                     </Col>
                     <Col span="12">
-                    <Form-item label="身份类型:" prop="identityType">
-                        <Input v-model="householdModify.identityType" style="width: 204px"/>
-                    </Form-item>
+                        <FormItem label="身份类型" prop="identityType">
+                            <Select v-model="householdModify.identityType" placeholder="选择身份信息" style="width: 204px">
+                                <Option value="1">业主</Option>
+                                <Option value="2">家属</Option>
+                                <Option value="3">租客</Option>
+                            </Select>
+                        </FormItem>
                     </Col>
                 </Row>
                 <Row>
@@ -158,7 +167,12 @@
                 <Row>
                     <Col span="12">
                     <Form-item label="证件类型:" prop="cardType">
-                        <Input v-model="householdModify.cardType" style="width: 204px"/>
+                        <!--<Input v-model="householdModify.cardType" style="width: 204px"/>-->
+                        <Select v-model="householdModify.cardType" placeholder="选择证件类型" style="width: 204px">
+                            <Option value="10">身份证</Option>
+                            <Option value="14">普通护照</Option>
+                            <Option value="15">驾驶证</Option>
+                        </Select>
                     </Form-item>
                     </Col>
                     <Col span="12">
@@ -182,7 +196,43 @@
                 <Row>
                     <Col span="12">
                     <Form-item label="身份证正面照片:" prop="idCardImage1">
-                        <Input v-model="householdModify.idCardImage1" style="width: 204px"/>
+                        <!--<Input v-model="householdModify.idCardImage1" style="width: 204px"/>-->
+                        <!--<Upload action="//jsonplaceholder.typicode.com/posts/">-->
+                            <!--<Button type="ghost" icon="ios-cloud-upload-outline">Upload files</Button>-->
+                        <!--</Upload>-->
+                        <div class="demo-upload-list" v-for="item in uploadList">
+                            <template v-if="item.status === 'finished'">
+                                <img :src="item.url">
+                                <div class="demo-upload-list-cover">
+                                    <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
+                                    <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <Progress v-if="item.showProgress" :percent="item.percentage" hide-info></Progress>
+                            </template>
+                        </div>
+                        <Upload
+                                ref="upload"
+                                :show-upload-list="false"
+                                :default-file-list="defaultList"
+                                :on-success="handleSuccess"
+                                :format="['jpg','jpeg','png']"
+                                :max-size="2048"
+                                :on-format-error="handleFormatError"
+                                :on-exceeded-size="handleMaxSize"
+                                :before-upload="handleBeforeUpload"
+                                multiple
+                                type="drag"
+                                action="//jsonplaceholder.typicode.com/posts/"
+                                style="display: inline-block;width:58px;">
+                            <div style="width: 58px;height:58px;line-height: 58px;">
+                                <Icon type="camera" size="20"></Icon>
+                            </div>
+                        </Upload>
+                        <Modal title="View Image" v-model="visible">
+                            <img :src="'https://o5wwk8baw.qnssl.com/' + imgName + '/large'" v-if="visible" style="width: 100%">
+                        </Modal>
                     </Form-item>
                     </Col>
                     <Col span="12">
@@ -223,8 +273,8 @@
                     id:null,
                     houseId:null,
                     householdName:null,
-                    sex:null,
-                    birthday:null,
+                    gender:null,
+                    birthDate:null,
                     identityType:null,
                     company:null,
                     department:null,
@@ -245,8 +295,8 @@
                     id:null,
                     houseId:null,
                     householdName:null,
-                    sex:null,
-                    birthday:null,
+                    gender:null,
+                    birthDate:null,
                     identityType:null,
                     company:null,
                     department:null,
@@ -267,8 +317,8 @@
                     id:null,
                     houseId:null,
                     householdName:null,
-                    sex:null,
-                    birthday:null,
+                    gender:null,
+                    birthDate:null,
                     identityType:null,
                     company:null,
                     department:null,
@@ -334,7 +384,7 @@
                             } else {
                                 callback();
                             }
-                          
+
                         }, trigger: 'blur'}
                     ],
                     sort: [
@@ -345,7 +395,7 @@
                             } else {
                                 callback();
                             }
-                          
+
                         }, trigger: 'blur'}
                     ],
                     icon: [
@@ -371,11 +421,20 @@
                     },
                     {
                         title: '性别',
-                        key: 'sex'
+                        key: 'gender',
+                        render:(h, params) => {
+//                            return h('div',
+//                                new Date(this.row.lastUpdate).Format('yyyy-MM-dd'));
+                            if(this.row.gender == 1) {
+                                return "男";
+                            }else{
+                                return "女";
+                            }
+                        }
                     },
                     {
                         title: '出生日期',
-                        key: 'birthday'
+                        key: 'birthDate'
                     },
                     {
                         title: '是否是业主',
@@ -387,7 +446,21 @@
                     }
                 ],
                 /*生产类型表数据*/
-                data1: []
+                data1: [],
+                /*上传图片定义*/
+                defaultList: [
+                    {
+                        'name': 'a42bdcc1178e62b4694c830f028db5c0',
+                        'url': 'https://o5wwk8baw.qnssl.com/a42bdcc1178e62b4694c830f028db5c0/avatar'
+                    },
+                    {
+                        'name': 'bc7521e033abdd1e92222d733590f104',
+                        'url': 'https://o5wwk8baw.qnssl.com/bc7521e033abdd1e92222d733590f104/avatar'
+                    }
+                ],
+                imgName: '',
+                visible: false,
+                uploadList: []
             }
         },
         mounted(){
@@ -422,8 +495,8 @@
                 this.household.id = null;
                 this.household.houseId = null;
                 this.household.householdName = null;
-                this.household.sex = null;
-                this.household.birthday = null;
+                this.household.gender = null;
+                this.household.birthDate = null;
                 this.household.identityType = null;
                 this.household.company = null;
                 this.household.department = null;
@@ -444,8 +517,8 @@
                 this.householdNew.id = null;
                 this.householdNew.houseId = null;
                 this.householdNew.householdName = null;
-                this.householdNew.sex = null;
-                this.householdNew.birthday = null;
+                this.householdNew.gender = null;
+                this.householdNew.birthDate = null;
                 this.householdNew.identityType = null;
                 this.householdNew.company = null;
                 this.householdNew.department = null;
@@ -466,8 +539,8 @@
                 this.householdModify.id = null;
                 this.householdModify.houseId = null;
                 this.householdModify.householdName = null;
-                this.householdModify.sex = null;
-                this.householdModify.birthday = null;
+                this.householdModify.gender = null;
+                this.householdModify.birthDate = null;
                 this.householdModify.identityType = null;
                 this.householdModify.company = null;
                 this.householdModify.department = null;
@@ -488,8 +561,8 @@
                 this.household.id = e.id;
                 this.household.houseId = e.houseId;
                 this.household.householdName = e.householdName;
-                this.household.sex = e.sex;
-                this.household.birthday = e.birthday;
+                this.household.gender = e.gender;
+                this.household.birthDate = e.birthDate;
                 this.household.identityType = e.identityType;
                 this.household.company = e.company;
                 this.household.department = e.department;
@@ -510,8 +583,8 @@
                 this.householdNew.id = e.id;
                 this.householdNew.houseId = e.houseId;
                 this.householdNew.householdName = e.householdName;
-                this.householdNew.sex = e.sex;
-                this.householdNew.birthday = e.birthday;
+                this.householdNew.gender = e.gender;
+                this.householdNew.birthDate = e.birthDate;
                 this.householdNew.identityType = e.identityType;
                 this.householdNew.company = e.company;
                 this.householdNew.department = e.department;
@@ -532,8 +605,8 @@
                 this.householdModify.id = e.id;
                 this.householdModify.houseId = e.houseId;
                 this.householdModify.householdName = e.householdName;
-                this.householdModify.sex = e.sex;
-                this.householdModify.birthday = e.birthday;
+                this.householdModify.gender = e.gender;
+                this.householdModify.birthDate = e.birthDate;
                 this.householdModify.identityType = e.identityType;
                 this.householdModify.company = e.company;
                 this.householdModify.department = e.department;
@@ -635,7 +708,7 @@
                 }
             },
             /*修改modal的modifyOk点击事件*/
-             modifyOk (householdModify) {
+            modifyOk (householdModify) {
                 this.$refs[householdModify].validate((valid) => {
                     if (valid) {
                         this.initHousehold();
@@ -711,7 +784,83 @@
                 this.householdModifySet(e);
                 this.modifyModal = true;
                 this.data1.sort();
+            },
+            /*图片上传 start */
+            handleView (name) {
+                this.imgName = name;
+                this.visible = true;
+            },
+            handleRemove (file) {
+                const fileList = this.$refs.upload.fileList;
+                this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
+            },
+            handleSuccess (res, file) {
+                file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';
+                file.name = '7eb99afb9d5f317c912f08b5212fd69a';
+            },
+            handleFormatError (file) {
+                this.$Notice.warning({
+                    title: 'The file format is incorrect',
+                    desc: 'File format of ' + file.name + ' is incorrect, please select jpg or png.'
+                });
+            },
+            handleMaxSize (file) {
+                this.$Notice.warning({
+                    title: 'Exceeding file size limit',
+                    desc: 'File  ' + file.name + ' is too large, no more than 2M.'
+                });
+            },
+            handleBeforeUpload () {
+                const check = this.uploadList.length < 5;
+                if (!check) {
+                    this.$Notice.warning({
+                        title: 'Up to five pictures can be uploaded.'
+                    });
+                }
+                return check;
             }
         }
     }
 </script>
+
+<style>
+
+    .demo-upload-list{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);
+        margin-right: 4px;
+    }
+    .demo-upload-list img{
+        width: 100%;
+        height: 100%;
+    }
+    .demo-upload-list-cover{
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.6);
+    }
+    .demo-upload-list:hover .demo-upload-list-cover{
+        display: block;
+    }
+    .demo-upload-list-cover i{
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
+
+
+</style>

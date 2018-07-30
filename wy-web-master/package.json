@@ -16,12 +16,19 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "vue": "^2.2.6",
-    "vue-router": "^2.3.1",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
     "iview": "^2.0.0-rc.13",
     "axios": "^0.16.2",
-    "vuex": "^2.2.1",
-    "vue-axios": "^2.0.2"
+    "vuex": "^2.5.0",
+    "vue-axios": "^2.0.2",
+    "element-ui": "^2.3.3",
+    "babel-polyfill": "^6.23.0",
+    "mavon-editor": "^2.5.4",
+    "vue-cropperjs": "^2.2.0",
+    "vue-quill-editor": "^3.0.6",
+    "vue-schart": "^1.0.0",
+    "vuedraggable": "^2.16.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^2.0.0",

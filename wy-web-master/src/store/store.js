@@ -1,5 +1,5 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import Vuex from 'vuex';
+import Vue from 'vue';
 import UsersModule from './modules/UsersModule';
 
 Vue.use(Vuex);
@@ -24,7 +24,7 @@ export default new Vuex.Store({
             return getters;
         },
         getTodoById: (state) => (id) => {
-            return state.todos.find(todo => todo.id === id)
+            return state.todos.find(todo => todo.id === id);
         },
         getSign:state =>{
             return state.ifSign;
@@ -49,4 +49,4 @@ export default new Vuex.Store({
             context.commit('add');
         }
     }
-})
+});

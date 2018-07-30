@@ -28,7 +28,7 @@ export default {
     },
     actions:{
         userLogin(context,{user_name,user_password,router}){
-        	axios({
+            axios({
                 method: 'post',
                 url: '/oauth/token',
                 params: {
@@ -59,4 +59,4 @@ export default {
             context.commit('clearUser');
         }
     }
-}
+};

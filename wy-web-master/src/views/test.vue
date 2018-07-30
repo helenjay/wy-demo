@@ -23,8 +23,7 @@
         methods: {
             click(){
                 this.$store.dispatch('userLogin',{"user_name":"test1","user_password":"123","router":this.$router});
-                this.$router.push({ path: 'base' }) 
-               
+                this.$router.push({ path: 'base' });
             },
             click2(){
                 this.axios({

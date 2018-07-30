@@ -2,10 +2,11 @@
 	<div style="margin: 20px;">
         <div>
             <Row style="margin-bottom: 25px;">
-                <Col span="8">菜单名称：
-                    <Select v-model="menuId" filterable clearable style="width: 200px">
-                        <Option v-for="item in menuList" :value="item.value" :key="item.value">{{ item.label }}</Option>
-                    </Select>
+                <Col span="8">房屋编码：
+                    <!--<Select v-model="houseId" filterable clearable style="width: 200px">-->
+                        <!--<Option v-for="item in houseList" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
+                    <!--</Select>-->
+                    <Input v-model="houseCode" placeholder="房屋编号或名称" style="width: 200px"/>
                 </Col>
                 <Col span="8"><Button type="primary" shape="circle" icon="ios-search" @click="search()">搜索</Button></Col>
             </Row>
@@ -30,81 +31,112 @@
             </ul>
         </div>
         <!--添加modal-->  
-        <Modal :mask-closable="false" :visible.sync="newModal" :loading = "loading" v-model="newModal" width="600" title="新建" @on-ok="newOk('menuNew')" @on-cancel="cancel()">
-            <Form ref="menuNew" :model="menuNew" :rules="ruleNew" :label-width="80" >
+        <Modal :mask-closable="false" :visible.sync="newModal" :loading = "loading" v-model="newModal" width="600" title="新建" @on-ok="newOk('houseNew')" @on-cancel="cancel()">
+            <Form ref="houseNew" :model="houseNew" :rules="ruleNew" :label-width="80" >
                 <Row>
                     <Col span="12">
-                        <Form-item label="菜单名称:" prop="name">
-                            <Input v-model="menuNew.name" style="width: 204px"/>
+                        <Form-item label="房屋编号:" prop="houseCode">
+                            <Input v-model="houseNew.houseCode" style="width: 204px"/>
                         </Form-item>
                     </Col>
                     <Col span="12">
-                        <Form-item label="路径:" prop="url">
-                            <Input v-model="menuNew.url" style="width: 204px"/>
+                        <Form-item label="所属楼号:" prop="buildingCode">
+                            <!--<Input v-model="houseNew.buildingCode" style="width: 204px"/>-->
+                            <Select v-model="houseNew.buildingCode" filterable clearable style="width: 200px">
+                                <Option v-for="item in buildingList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            </Select>
                         </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <Form-item label="父类ID:" prop="parentId">
-                            <Input v-model="menuNew.parentId" style="width: 204px"/>
+                        <Form-item label="销售面积:" prop="houseArea">
+                            <Input v-model="houseNew.houseArea" style="width: 204px"/>
                         </Form-item>
                     </Col>
                     <Col span="12">
-                        <Form-item label="排序号:" prop="sort">
-                            <Input v-model="menuNew.sort" style="width: 204px"/>
+                        <Form-item label="室内面积:" prop="houseActual">
+                            <Input v-model="houseNew.houseActual" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <Form-item label="图标:" prop="icon">
-                            <Input v-model="menuNew.icon" style="width: 204px"/>
+                        <Form-item label="房屋户型:" prop="houseType">
+                            <Input v-model="houseNew.houseType" style="width: 204px"/>
+                        </Form-item>
+                    </Col>
+                    <Col span="12">
+                        <Form-item label="房屋朝向:" prop="face">
+                            <Input v-model="houseNew.face" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
-                <Form-item label="描述:" prop="remark">
-                     <Input v-model="menuNew.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
-                </Form-item>
+                <Row>
+                    <Col span="12">
+                        <Form-item label="所在楼层:" prop="floor">
+                            <Input v-model="houseNew.floor" style="width: 204px"/>
+                        </Form-item>
+                    </Col>
+                    <Col span="12">
+                        <Form-item label="房屋性质:" prop="type">
+                            <Input v-model="houseNew.type" style="width: 204px"/>
+                        </Form-item>
+                    </Col>
+                </Row>
             </Form>
         </Modal>
         <!--修改modal-->  
-        <Modal :mask-closable="false" :visible.sync="modifyModal" :loading = "loading" v-model="modifyModal" width="600" title="修改" @on-ok="modifyOk('menuModify')" @on-cancel="cancel()">
-            <Form ref="menuModify" :model="menuModify" :rules="ruleModify" :label-width="80" >
+        <Modal :mask-closable="false" :visible.sync="modifyModal" :loading = "loading" v-model="modifyModal" width="600" title="修改" @on-ok="modifyOk('houseModify')" @on-cancel="cancel()">
+            <Form ref="houseModify" :model="houseModify" :rules="ruleModify" :label-width="80" >
                 <Row>
                     <Col span="12">
-                        <Form-item label="菜单名称:" prop="name">
-                            <Input v-model="menuModify.name" style="width: 204px"/>
+                        <Form-item label="房屋编号:" prop="name">
+                            <Input v-model="houseModify.houseCode" style="width: 204px"/>
                         </Form-item>
                     </Col>
                     <Col span="12">
-                        <Form-item label="路径:" prop="url">
-                            <Input v-model="menuModify.url" style="width: 204px"/>
+                        <Form-item label="所属楼号:" prop="buildingCode">
+                            <Input v-model="houseModify.buildingCode" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <Form-item label="父类ID:" prop="parentId">
-                            <Input v-model="menuModify.parentId" style="width: 204px"/>
+                        <Form-item label="销售面积:" prop="houseArea">
+                            <Input v-model="houseModify.houseArea" style="width: 204px"/>
                         </Form-item>
                     </Col>
                     <Col span="12">
-                        <Form-item label="排序号:" prop="sort">
-                            <Input v-model="menuModify.sort" style="width: 204px"/>
+                        <Form-item label="室内面积:" prop="houseActual">
+                            <Input v-model="houseModify.houseActual" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
                 <Row>
                     <Col span="12">
-                        <Form-item label="图标:" prop="icon">
-                            <Input v-model="menuModify.icon" style="width: 204px"/>
+                        <Form-item label="房屋户型:" prop="houseType">
+                            <Input v-model="houseModify.houseType" style="width: 204px"/>
+                        </Form-item>
+                    </Col>
+                    <Col span="12">
+                        <Form-item label="房屋朝向:" prop="face">
+                            <Input v-model="houseModify.face" style="width: 204px"/>
                         </Form-item>
                     </Col>
                 </Row>
-                <Form-item label="描述:" prop="remark">
-                     <Input v-model="menuModify.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}"></Input>
-                </Form-item>
+                <Row>
+                    <Col span="12">
+                    <Form-item label="所在楼层:" prop="floor">
+                        <Input v-model="houseModify.floor" style="width: 204px"/>
+                    </Form-item>
+                    </Col>
+                    <Col span="12">
+                    <Form-item label="房屋性质:" prop="type">
+                        <Input v-model="houseModify.type" style="width: 204px"/>
+                    </Form-item>
+                    </Col>
+                </Row>
             </Form>
         </Modal>
     </div>
@@ -114,7 +146,8 @@
         data () {
             return {
                 /*用于查找的菜单id*/
-                menuId:null,
+                houseId:null,
+                houseCode:null,
             	/*选择的数量*/
                 count:null,
             	/*选中的组数据*/
@@ -132,106 +165,99 @@
                 	page:0,
                 	pageSize:10
                 },
-                /*menu实体*/
-                menu:{                             
+                /*house实体*/
+                house:{                             
                     id:null,
-                    name:null,
-                    url:null,
-                    parentId:null,
-                    sort:null,
-                    remark:null,
-                    icon:null
+                    buildingId:null,
+                    villageCode:null,
+                    buildingCode:null,
+                    houseCode:null,
+                    houseName:null,
+                    floor:null,
+                    houseType:null,
+                    houseArea:null,
+                    houseActual:null,
+                    face:null,
+                    type:null
                 },
-                /*用于添加的menu实体*/
-                menuNew:{
+                /*用于添加的house实体*/
+                houseNew:{
                 	id:null,
-                    name:null,
-                    url:null,
-                    parentId:null,
-                    sort:null,
-                    remark:null,
-                    icon:null
+                    buildingId:null,
+                    villageCode:null,
+                    buildingCode:null,
+                    houseCode:null,
+                    houseName:null,
+                    floor:null,
+                    houseType:null,
+                    houseArea:null,
+                    houseActual:null,
+                    face:null,
+                    type:null
                 },
-                /*用于修改的menu实体*/
-                menuModify:{
-                	id:null,
-                    name:null,
-                    url:null,
-                    parentId:null,
-                    sort:null,
-                    remark:null,
-                    icon:null
+                /*用于修改的house实体*/
+                houseModify:{
+                    id:null,
+                    buildingId:null,
+                    villageCode:null,
+                    buildingCode:null,
+                    houseCode:null,
+                    houseName:null,
+                    floor:null,
+                    houseType:null,
+                    houseArea:null,
+                    houseActual:null,
+                    face:null,
+                    type:null
                 },
                 /*新建验证*/
                 ruleNew:{
-                    name: [
-                        { type:'string',required: true, message: '输入菜单名', trigger: 'blur' }
+                    houseCode: [
+                        { type:'string',required: true, message: '输入房屋编号', trigger: 'blur' }
                     ],
-                    url: [
-                        { type:'string',required: true, message: '输入路径', trigger: 'blur' }
-                    ],
-                    parentId: [
-                        { required: true, message: '输入父类ID', trigger: 'blur' },
+                    floor: [
+                        { type:'string',required: true, message: '输入房屋楼层', trigger: 'blur' },
                         {validator(rule, value, callback) {
                             if (!Number.isInteger(+value)) {
                                 callback(new Error('请输入数字'));
                             } else {
                                 callback();
                             }
-                          
+
                         }, trigger: 'blur'}
                     ],
-                    sort: [
-                        { required: true, message: '输入排序', trigger: 'blur' },
-                        {validator(rule, value, callback) {
-                            if (!Number.isInteger(+value)) {
-                                callback(new Error('请输入数字'));
-                            } else {
-                                callback();
-                            }
-                          
-                        }, trigger: 'blur'}
+                    houseArea: [
+                        { required: true, message: '输入销售面积', trigger: 'blur' }
                     ],
-                    icon: [
-                        { type:'string',required: true, message: '输入图标', trigger: 'blur' }
+                    houseActual: [
+                        { required: true, message: '输入实际面积', trigger: 'blur' }
                     ]
                 },
                 /*修改验证*/
                 ruleModify:{
-                    name: [
-                        { type:'string',required: true, message: '输入菜单名', trigger: 'blur' }
+                    houseCode: [
+                        { type:'string',required: true, message: '输入房屋编号', trigger: 'blur' }
                     ],
-                    url: [
-                        { type:'string',required: true, message: '输入路径', trigger: 'blur' }
-                    ],
-                    parentId: [
-                        { required: true, message: '输入父类ID', trigger: 'blur' },
+                    floor: [
+                        { type:'string',required: true, message: '输入房屋楼层', trigger: 'blur' },
                         {validator(rule, value, callback) {
                             if (!Number.isInteger(+value)) {
                                 callback(new Error('请输入数字'));
                             } else {
                                 callback();
                             }
-                          
+
                         }, trigger: 'blur'}
                     ],
-                    sort: [
-                        { required: true, message: '输入排序', trigger: 'blur' },
-                        {validator(rule, value, callback) {
-                            if (!Number.isInteger(+value)) {
-                                callback(new Error('请输入数字'));
-                            } else {
-                                callback();
-                            }
-                          
-                        }, trigger: 'blur'}
+                    houseArea: [
+                        { required: true, message: '输入销售面积', trigger: 'blur' }
                     ],
-                    icon: [
-                        { type:'string',required: true, message: '输入图标', trigger: 'blur' }
+                    houseActual: [
+                        { required: true, message: '输入实际面积', trigger: 'blur' }
                     ]
                 },
-                /*菜单列表*/
-                menuList:[],
+                /*楼栋列表*/
+                buildingList:[],
             	/*生产类型表显示字段*/
             	columns1: [
                     {
@@ -240,28 +266,40 @@
                         align: 'center'
                     },
                     {
-                        title: '菜单ID',
+                        title: '房屋ID',
                         key: 'id'
                     },
                     {
-                        title: '菜单名称',
-                        key: 'name'
+                        title: '房屋编号',
+                        key: 'houseCode'
                     },
                     {
-                        title: '地址',
-                        key: 'url'
+                        title: '所属楼号',
+                        key: 'buildingCode'
                     },
                     {
-                        title: '上级菜单id',
-                        key: 'parentId'
+                        title: '销售面积',
+                        key: 'houseArea'
                     },
                     {
-                        title: '排序',
-                        key: 'sort'
+                        title: '室内面积',
+                        key: 'houseActual'
                     },
                     {
-                        title: '图标',
-                        key: 'icon'
+                        title: '房屋户型',
+                        key: 'houseType'
+                    },
+                    {
+                        title: '房屋朝向',
+                        key: 'face'
+                    },
+                    {
+                        title: '所在楼层',
+                        key: 'floor'
+                    },
+                    {
+                        title: '房屋性质',
+                        key: 'type'
                     }
                 ],
                 /*生产类型表数据*/
@@ -272,20 +310,19 @@
         	/*页面初始化调用方法*/
             this.getTable({
                 "pageInfo":this.pageInfo,
-                'menuId':this.menuId
+                'houseId':this.houseId,
+                'houseCode':this.houseCode
             });
+            /*获取小区楼栋列表，key为楼栋，value为最高层级*/
             this.axios({
               method: 'get',
-              url: '/menus/parentId',
-              params: {
-                'parentId': 0 
-              }
+              url: '/buildingAll'
             }).then(function (response) {
                 var listTemp = response.data;
                 for (var i = 0; i < listTemp.length; i++) {
-                    this.menuList.push({
-                        "value": listTemp[i].id,
-                        "label": listTemp[i].name
+                    this.buildingList.push({
+                        "value": listTemp[i].floorTotal,
+                        "label": listTemp[i].buildingCode
                     });
                 }
             }.bind(this)).catch(function (error) {
@@ -298,75 +335,106 @@
         		this.pageInfo.page = 0;
         		this.pageInfo.pageSize = 10;
         	},
-            /*menu实体初始化*/
-            initMenu(){
-                this.menu.id = null;
-                this.menu.name = null;
-                this.menu.url = null;
-                this.menu.parentId = null;
-                this.menu.sort = null;
-                this.menu.remark = null;
-                this.menu.icon = null;
+            /*house实体初始化*/
+            initHouse(){
+                this.house.id = null;
+                this.house.buildingId = null;
+                this.house.villageCode = null;
+                this.house.buildingCode = null;
+                this.house.houseCode = null;
+                this.house.houseName = null;
+                this.house.floor = null;
+                this.house.houseType = null;
+                this.house.houseArea = null;
+                this.house.houseActual = null;
+                this.house.face = null;
+                this.house.type = null;
             },
-            /*menuNew实体初始化*/
-            initMenuNew(){
-                this.menuNew.id = null;
-                this.menuNew.name = null;
-                this.menuNew.url = null;
-                this.menuNew.parentId = null;
-                this.menuNew.sort = null;
-                this.menuNew.remark = null;
-                this.menuNew.icon = null;
+            /*houseNew实体初始化*/
+            initHouseNew(){
+                this.houseNew.id = null;
+                this.houseNew.buildingId = null;
+                this.houseNew.villageCode = null;
+                this.houseNew.buildingCode = null;
+                this.houseNew.houseCode = null;
+                this.houseNew.houseName = null;
+                this.houseNew.floor = null;
+                this.houseNew.houseType = null;
+                this.houseNew.houseArea = null;
+                this.houseNew.houseActual = null;
+                this.houseNew.face = null;
+                this.houseNew.type = null;
             },
-            /*menuModify实体初始化*/
-            initMenuModify(){
-                this.menuModify.id = null;
-                this.menuModify.name = null;
-                this.menuModify.url = null;
-                this.menuModify.parentId = null;
-                this.menuModify.sort = null;
-                this.menuModify.remark = null;
-                this.menuModify.icon = null;
+            /*houseModify实体初始化*/
+            initHouseModify(){
+                this.houseModify.id = null;
+                this.houseModify.buildingId = null;
+                this.houseModify.villageCode = null;
+                this.houseModify.buildingCode = null;
+                this.houseModify.houseCode = null;
+                this.houseModify.houseName = null;
+                this.houseModify.floor = null;
+                this.houseModify.houseType = null;
+                this.houseModify.houseArea = null;
+                this.houseModify.houseActual = null;
+                this.houseModify.face = null;
+                this.houseModify.type = null;
             },
-            /*menuNew设置*/
-            menuSet(e){
-                this.menu.id = e.id;
-                this.menu.name = e.name;
-                this.menu.url = e.url;
-                this.menu.parentId = e.parentId;
-                this.menu.sort = e.sort;
-                this.menu.remark = e.remark;
-                this.menu.icon = e.icon;
+            /*houseNew设置*/
+            houseSet(e){
+                this.house.id = e.id;
+                this.house.buildingId = e.buildingId;
+                this.house.villageCode = e.villageCode;
+                this.house.buildingCode = e.buildingCode;
+                this.house.houseCode = e.houseCode;
+                this.house.houseName = e.houseName;
+                this.house.floor = e.floor;
+                this.house.houseType = e.houseType;
+                this.house.houseArea = e.houseArea;
+                this.house.houseActual = e.houseActual;
+                this.house.face = e.face;
+                this.house.type = e.type;
             },
-            /*menuNew设置*/
-            menuNewSet(e){
-                this.menuNew.id = e.id;
-                this.menuNew.name = e.name;
-                this.menuNew.url = e.url;
-                this.menuNew.parentId = e.parentId;
-                this.menuNew.sort = e.sort;
-                this.menuNew.remark = e.remark;
-                this.menuNew.icon = e.icon;
+            /*houseNew设置*/
+            houseNewSet(e){
+                this.houseNew.id = e.id;
+                this.houseNew.buildingId = e.buildingId;
+                this.houseNew.villageCode = e.villageCode;
+                this.houseNew.buildingCode = e.buildingCode;
+                this.houseNew.houseCode = e.houseCode;
+                this.houseNew.houseName = e.houseName;
+                this.houseNew.floor = e.floor;
+                this.houseNew.houseType = e.houseType;
+                this.houseNew.houseArea = e.houseArea;
+                this.houseNew.houseActual = e.houseActual;
+                this.houseNew.face = e.face;
+                this.houseNew.type = e.type;
             },
-            /*menuModify设置*/
-            menuModifySet(e){
-                this.menuModify.id = e.id;
-                this.menuModify.name = e.name;
-                this.menuModify.url = e.url;
-                this.menuModify.parentId = e.parentId+'';
-                this.menuModify.sort = e.sort+'';
-                this.menuModify.remark = e.remark;
-                this.menuModify.icon = e.icon;
-            },
+            /*houseModify设置*/
+            houseModifySet(e){
+                this.houseModify.id = e.id;
+                this.houseModify.buildingId = e.buildingId;
+                this.houseModify.villageCode = e.villageCode;
+                this.houseModify.buildingCode = e.buildingCode;
+                this.houseModify.houseCode = e.houseCode;
+                this.houseModify.houseName = e.houseName;
+                this.houseModify.floor = e.floor;
+                this.houseModify.houseType = e.houseType;
+                this.houseModify.houseArea = e.houseArea;
+                this.houseModify.houseActual = e.houseActual;
+                this.houseModify.face = e.face;
+                this.houseModify.type = e.type;
+             },
             /*得到表数据*/
             getTable(e) {
                 this.axios({
                   method: 'get',
-                  url: '/menus',
+                  url: '/houses',
                   params: {
-                    'page':e.pageInfo.page,
-                    'pageSize':e.pageInfo.pageSize,
-                    'menuId':e.menuId
+                      'page':e.pageInfo.page,
+                      'pageSize':e.pageInfo.pageSize,
+                      'houseId':e.houseId,
+                      'houseCode':e.houseCode
                   }
                 }).then(function (response) {
                     this.data1=response.data.data;
@@ -380,7 +448,8 @@
                 this.initPageInfo();
                 this.getTable({
                     "pageInfo":this.pageInfo,
-                    'menuId':this.menuId
+                    'houseId':this.houseId,
+                    'houseCode':this.houseCode
                 });   
             },
             /*分页点击事件*/
@@ -388,32 +457,34 @@
                 this.pageInfo.page = e-1;
                 this.getTable({  
                     "pageInfo":this.pageInfo,
-                    'menuId':this.menuId
+                    'houseId':this.houseId,
+                    'houseCode':this.houseCode
                 });
             },
             /*新建点击触发事件*/
             openNewModal(){
                 this.newModal = true;
-                this.initMenuNew();
+                this.initHouseNew();
                 this.data1.sort();
                 this.count = 0;
                 this.groupId = null;
             },
             /*新建modal的newOk点击事件*/
-            newOk (menuNew) { 
-                this.$refs[menuNew].validate((valid) => {
+            newOk (houseNew) { 
+                this.$refs[houseNew].validate((valid) => {
                     if (valid) {
-                        this.initMenu();
-                        this.menuSet(this.menuNew);
+                        this.initHouse();
+                        this.houseSet(this.houseNew);
                         this.axios({
                             method: 'post',
-                            url: '/menus/menu',
-                            data: this.menu
+                            url: '/houses/house',
+                            data: this.house
                         }).then(function (response) {
-                            this.initMenuNew();
+                            this.initHouseNew();
                             this.getTable({
                                 "pageInfo":this.pageInfo,
-                                'menuId':this.menuId
+                                'houseId':this.houseId,
+                                'houseCode':this.houseCode
                             });
                             this.$Message.info('新建成功');
                         }.bind(this)).catch(function (error) {
@@ -440,20 +511,21 @@
                 }
             },
             /*修改modal的modifyOk点击事件*/
-             modifyOk (menuModify) { 
-                this.$refs[menuModify].validate((valid) => {
+             modifyOk (houseModify) { 
+                this.$refs[houseModify].validate((valid) => {
                     if (valid) {
-                        this.initMenu();
-                        this.menuSet(this.menuModify);
+                        this.initHouse();
+                        this.houseSet(this.houseModify);
                         this.axios({
                           method: 'put',
-                          url: '/menus/'+this.menu.id,
-                          data: this.menu
+                          url: '/houses/'+this.house.id,
+                          data: this.house
                         }).then(function (response) {
-                            this.initMenuNew();
+                            this.initHouseNew();
                             this.getTable({
                                 "pageInfo":this.pageInfo,
-                                'menuId':this.menuId
+                                'houseId':this.houseId,
+                                'houseCode':this.houseCode
                             });
                             this.$Message.info('修改成功');
                         }.bind(this)).catch(function (error) {
@@ -478,7 +550,7 @@
             /*table选择后触发事件*/
             change(e){
                 if(e.length==1){
-                    this.menuModifySet(e['0']);
+                    this.houseModifySet(e['0']);
                 }
                 this.setGroupId(e);              
             },
@@ -495,12 +567,13 @@
                 if(this.groupId!=null && this.groupId!=""){
                     this.axios({
                       method: 'delete',
-                      url: '/menus',
+                      url: '/houses',
                       data: this.groupId
                     }).then(function (response) {
                         this.getTable({
                             "pageInfo":this.pageInfo,
-                            'menuId':this.menuId
+                            'houseId':this.houseId,
+                            'houseCode':this.houseCode
                         });
                         this.groupId=null;
                         this.count=0;
@@ -512,7 +585,7 @@
             },
             /*表格中双击事件*/
             dblclick(e){
-                this.menuModifySet(e);
+                this.houseModifySet(e);
                 this.modifyModal = true;
                 this.data1.sort();
             }

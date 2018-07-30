@@ -6,7 +6,7 @@
         data(){
             return {
 
-            }
+            };
         },
         mounted(){
         	var code = this.$router.currentRoute.query.code;

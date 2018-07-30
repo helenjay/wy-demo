@@ -47,12 +47,16 @@ const routers = [
 	    component: (resolve) => require(['./views/base/base.vue'], resolve),
 	    children: [
 	    	{
-	    		path: 'welcome',
-                name: 'welcome',
-                component: (resolve) => require(['./views/sys/welcome.vue'], resolve),
-                meta: {
-                    title:"welcome"
-                }
+                // path: 'welcome',
+                // name: 'welcome',
+                // component: (resolve) => require(['./views/sys/welcome.vue'], resolve),
+                // meta: {
+                //     title:"welcome"
+                // }
+
+                path: 'welcome',
+                component: resolve => require(['./views/sys/Dashboard.vue'], resolve),
+                meta: { title: '系统首页' }
 	    	},
 	    	{
 	    		path: 'user',
@@ -95,11 +99,11 @@ const routers = [
                 }
 	    	},
 	    	{
-	    		path: 'test4',
-                name: 'test4',
-                component: (resolve) => require(['./views/test/test4.vue'], resolve),
+	    		path: 'building',
+                name: 'building',
+                component: (resolve) => require(['./views/sys/building.vue'], resolve),
                 meta: {
-                    title:"test4"
+                    title:"building"
                 }
 	    	},
 	    	{
